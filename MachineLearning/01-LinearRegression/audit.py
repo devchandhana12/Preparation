@@ -106,11 +106,13 @@ def standardize_text(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def parse_duration(df: pd.DataFrame) -> pd.DataFrame:
-    """'2h 45m' -> 165, '19h' -> 1140, '5m' -> 5"""
+    """Convert only complete duration values such as '2h 45m', '19h', or '5m' to minutes."""
     df = df.copy()
-    hours = df["Duration"].str.extract(r"(\d+)h")[0].astype(float).fillna(0)
-    minutes = df["Duration"].str.extract(r"(\d+)m")[0].astype(float).fillna(0)
-    df["Duration_minutes"] = hours * 60 + minutes
+    duration = df["Duration"].astype("string").str.strip()  # Normalize duration values before validation.
+    valid_duration = duration.str.fullmatch(r"(?:\d+h(?:\s+\d+m)?|\d+m)", na=False)  # Reject partial strings such as malformed duration text.
+    hours = pd.to_numeric(duration.str.extract(r"(\d+)h")[0], errors="coerce").fillna(0)  # Extract a valid hour component.
+    minutes = pd.to_numeric(duration.str.extract(r"(\d+)m")[0], errors="coerce").fillna(0)  # Extract a valid minute component.
+    df["Duration_minutes"] = (hours * 60 + minutes).where(valid_duration)  # Preserve invalid values as missing for later imputation.
     return df.drop(columns="Duration")
 
 

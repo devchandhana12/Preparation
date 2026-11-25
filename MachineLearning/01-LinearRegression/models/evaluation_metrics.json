@@ -1,0 +1,53 @@
+{
+  "dataset": {
+    "raw_training_rows": 10683,
+    "clean_training_rows": 10460,
+    "latest_month": "2019-06"
+  },
+  "latest_month": {
+    "median_baseline": {
+      "mae_inr": 3253.447900936273,
+      "rmse_inr": 3814.113245670658,
+      "r2": -0.030978895203790824,
+      "bias_inr": -661.152521896708,
+      "train_rows": 7149,
+      "validation_rows": 3311,
+      "floored_rows": 0
+    },
+    "linear_regression": {
+      "mae_inr": 1841.9081260667379,
+      "rmse_inr": 2273.873515544697,
+      "r2": 0.6335664631002267,
+      "bias_inr": 566.8096132727618,
+      "train_rows": 7149,
+      "validation_rows": 3311,
+      "floored_rows": 0
+    }
+  },
+  "grouped_itineraries": {
+    "median_baseline": {
+      "mae_inr": 3646.314887365328,
+      "rmse_inr": 4855.47940972228,
+      "r2": -0.017319746702760375,
+      "bias_inr": -633.5401567091087,
+      "train_rows": 8418,
+      "validation_rows": 2042,
+      "floored_rows": 0
+    },
+    "linear_regression": {
+      "mae_inr": 2108.7550566251934,
+      "rmse_inr": 3274.5475544032793,
+      "r2": 0.5373038939942711,
+      "bias_inr": -8.538141345481185,
+      "train_rows": 8418,
+      "validation_rows": 2042,
+      "floored_rows": 0
+    }
+  },
+  "test_inference": {
+    "prediction_rows": 2671,
+    "floored_rows": 0,
+    "prediction_min_inr": 1501.66,
+    "prediction_max_inr": 57911.3
+  }
+}
